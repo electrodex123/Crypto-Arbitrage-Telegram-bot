@@ -38,8 +38,8 @@ class Exchanges:
         Returns:
             NoReturn: This function does not return anything.
         """
-        invoke = bot.send_message(message.chat.id, '\U0001F554 Подождите, идет загрузка бирж...\n'
-                                                   'Пока можете перекусить.. \U0001F355',
+        invoke = bot.send_message(message.chat.id, '\U0001F554 Hold on, Loading exchanges is in progress...\n'
+                                                   'You can grab a snack in the meantime... \U0001F355',
                                   reply_markup=ReplyKeyboardRemove())
         thread_objects = list()
         for exchange in [exchange for exchange in self.__exchanges_obj]:
@@ -181,7 +181,7 @@ class BestOffer(Exchanges):
                                                         option='sell',
                                                         price=best[sym]['bid'])
         spread = round(bid_with_fee['fee_cost'] - ask_with_fee['fee_cost'], 5)
-        best[sym]['СПРЕД'] = spread
+        best[sym]['Spread'] = spread
 
         if spread > 0 and spread > self._best['spread'] and min_v > 0.1 \
                 and best[sym]['ask'] > 0.01 \
@@ -240,7 +240,7 @@ class BestOffer(Exchanges):
                 del self._working_directory[key]
 
         thread_objects = list()
-        start = bot.send_message(chat_id=self._chat_id, text=f'\U0000231B Обрабатываем пары..')
+        start = bot.send_message(chat_id=self._chat_id, text=f'\U0000231B Processing pairs..')
         for i, (symbol, exchanges) in enumerate(self._working_directory.items()):
             if symbol.split('/USDT')[0] not in super().bad_list_values:
                 thread = Thread(target=self._counter, args=(symbol, exchanges))  # запуск вычисления
@@ -250,7 +250,7 @@ class BestOffer(Exchanges):
                     time.sleep(0.1)
                     bot.edit_message_text(message_id=start.message_id,
                                           chat_id=self._chat_id,
-                                          text=f'\U0000231B Обработано {i} криптопар')
+                                          text=f'\U0000231B Processed {i} crypto pairs')
             self._best['total'] = i
         for thread in thread_objects:
             thread.join()
