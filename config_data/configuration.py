@@ -8,7 +8,7 @@ else:
     load_dotenv()
 
 # ✅ Get BOT_TOKEN from environment variables
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+BOT_TOKEN = os.getenv("7905043430:AAFJAwPuNhXy4C9vFEIAX0r4J0_ZyhkxiM0")
 
 # ✅ Default commands with descriptions
 DEFAULT_COMMANDS = (
