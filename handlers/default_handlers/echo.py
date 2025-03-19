@@ -14,6 +14,7 @@ def bot_echo(message: Message):
     bd_controller.create(message)
     Logger(message).log_activity("echo")
     bot.reply_to(
-        message, "Команда не распознана. Пожалуйста, введите /help для получения списка команд.",
-        reply_markup=types.ReplyKeyboardRemove())
+        message, "Command not recognized. Please enter /help to get the list of available commands.",
+        reply_markup=types.ReplyKeyboardRemove()
+    )
     bd_controller.update_last_request_time(message)
